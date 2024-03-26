@@ -19,14 +19,15 @@ let notes = [
     }
 ]
 
+// Luo uusi token 'data', joka palauttaa pyynnön mukana lähetetyn datan.
 morgan.token('data', function (req, res) { return JSON.stringify(req.body) })
 
 const app = express()
 
-app.use(express.json())
+app.use(express.json()) // Tämä on tarpeen, jotta Express.js voi käsitellä JSON-pyyntöjä.
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :data'))
 
-app.get('/api/persons', (request, response) => {
+app.get('/', (request, response) => {
     response.json(notes)
 })
 
@@ -57,7 +58,7 @@ app.delete('/api/persons/:id', (request, response) => {
     response.status(204).end()
 })
 
-const PORT = process.env.PORT || 3001
+const PORT = 3001
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
 })
