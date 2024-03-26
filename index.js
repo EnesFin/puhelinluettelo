@@ -19,12 +19,11 @@ let notes = [
     }
 ]
 
-// Luo uusi token 'data', joka palauttaa pyynnön mukana lähetetyn datan.
 morgan.token('data', function (req, res) { return JSON.stringify(req.body) })
 
 const app = express()
 
-app.use(express.json()) // Tämä on tarpeen, jotta Express.js voi käsitellä JSON-pyyntöjä.
+app.use(express.json())
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :data'))
 
 app.get('/', (request, response) => {
